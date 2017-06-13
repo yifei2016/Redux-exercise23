@@ -1,8 +1,27 @@
-import {ADD_ITEM,DELETE_ITME,HISTORY,CHANGE_TAB,ADDQUANTITY} from '../actions';
+import {ADD_ITEM,DELETE_ITME,HISTORY,CHANGE_TAB,ADDQUANTITY,ADD_PRODUCT} from '../actions';
 
+// function productReducer(state=[],action){
+//   return state;
+// }
 function productReducer(state=[],action){
-  return state;
-}
+  switch (action.type) {
+    case ADD_PRODUCT:
+     return action.product
+    default:
+      return state;
+  }
+  }
+//   function productReducer(state=[], action) {
+//     switch (action.type) {
+//       case ADD_PRODUCT:
+//     return [
+//         ...state.slice(0, action.index),
+//         action.item,
+//         ...state.slice(action.index)
+//     ]
+//   }
+// }
+
 function tabReducer(state=1,action){
 	switch(action.type){
 		case CHANGE_TAB:
@@ -10,6 +29,10 @@ function tabReducer(state=1,action){
 		default:
 		  return state;
 	}
+}
+function catalogReducer(state={},action){
+  // switch(action.)
+  return state;
 }
 function cartReducer(state={},action){
 	if(state.items===undefined){
@@ -25,7 +48,7 @@ function cartReducer(state={},action){
 				return (p1.name === p2.name && p1.affiliation === p2.affiliation && p1.price === p2.price && p1.ordinaryPrice ===p2.ordinaryPrice && p1.img===p2.img)
 			}
 			return {...state, items: state.items.filter(x=> !compareProducts(x, action.item))}
-			
+
 			// state = state.items.slice(itemIndex,1);
 			// return state;
 			default:
@@ -42,4 +65,4 @@ function historyReducer(state=[],action){
 		  return state;
 	}
 }
-export {cartReducer,historyReducer,tabReducer,productReducer};
+export {cartReducer,historyReducer,tabReducer,productReducer,catalogReducer};

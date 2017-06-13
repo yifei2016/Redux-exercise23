@@ -1,12 +1,29 @@
 import Product from './Product';
-import React from 'react';
+import React,{Component} from 'react';
+import {connect} from 'react-redux';
 
-function Catalog(props){
-  const productList = props.pros.map((x,index)=> <Product key={index} data={x}/>)
-  return(
-    <div className="d-flex flex-wrap justify-content-start">
-      {productList}
-    </div>
-  )
+class Catalog extends Component{
+
+  constructor(props){
+    super(props);
+
+  }
+
+  render(){
+    const productList = this.props.catalog.products.map((x,index)=> <Product key={index} data={x}/>)
+   
+    return(
+      <div className="d-flex flex-wrap justify-content-start">
+        {productList}
+      </div>
+    )
+  }
+
 }
-export default Catalog;
+function mapStateToProps(state) {
+	return {
+		catalog: state.catalog
+
+	}
+}
+export default connect(mapStateToProps)(Catalog);
