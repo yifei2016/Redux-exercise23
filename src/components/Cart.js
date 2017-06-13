@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Modal from 'react-modal';
-import {createStore, combineReducers} from 'redux';
-import {Provider} from 'react-redux';
-import ReactDOM from 'react-dom';
-import {ADD_ITEM} from '../actions/actions';
-import registerServiceWorker from '../registerServiceWorker';
+// import ReactDOM from 'react-dom';
 import Item from './Item';
+import {connect} from 'react-redux';
 
 
 // let initialState = {
@@ -56,7 +53,8 @@ class Cart extends React.Component {
   }
   render() {
     // const state = this.props.getState();
-    let items = this.props.cart.items.map((x,index)=><Item key={index} data={x}/>)
+    let items = this.props.cart.items.map((x,index)=><Item cartToCatalog={this.props.cart} key={index} data={x}/>)
+     console.log('cart is',this.props.cart)
     return (
       <div>
         <button className="fa fa-shopping-basket fa-2x basket"  onClick={this.openModal}></button>
@@ -78,5 +76,12 @@ class Cart extends React.Component {
     );
   }
 }
+function mapStateToProps(state) {
+	return {
+    products: state.products,
+		cart: state.cart
+	}
+}
 
-export default Cart;
+export default connect(mapStateToProps)(Cart);
+// export default Cart;

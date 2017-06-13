@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import { CHANGE_TAB } from './actions/actions.js';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
-import {cartReducer} from './reducers/reducer.js';
+import {tabReducer,cartReducer,historyReducer,productReducer} from './reducers';
 
 
 let initialState = {
+	tab:1,
 	products: [
 		{
 		affiliation: 'Påsklakanset',
@@ -66,11 +66,19 @@ let initialState = {
 		ordinaryPrice:'79,-',
 		img: 'https://www.hemtex.se/media/134995000000001_normal.jpg'
 	}],
- cart: {items:[]}
+ cart: {
+	 items:[],
+	 total:0,
+	 count:0
+ },
+ history:[{type:''}]
 }
 
 let rootReducer = combineReducers({
-	cart: cartReducer
+	tab:tabReducer,
+	cart: cartReducer,
+	history:historyReducer,
+  products:productReducer
 });
 
 const store = createStore(rootReducer, initialState);

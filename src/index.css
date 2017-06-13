@@ -38,3 +38,7 @@ img:hover  {
 .varuKorg{
   margin-bottom: 5%;
 }
+.delete{
+  border:none;
+  background: none;
+}
