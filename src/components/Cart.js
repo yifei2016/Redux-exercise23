@@ -76,7 +76,12 @@ class Cart extends React.Component {
     );
   }
 }
+function mapStateToProps(state) {
+	return {
+		cart: state.cart
+	}
+}
+export default connect(mapStateToProps)(Cart);
 
 
-export default Cart;
 // export default Cart;

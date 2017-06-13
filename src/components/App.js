@@ -63,7 +63,7 @@ class App extends Component {
 							<button type="button" onClick={this.handleClickForm} className="btn btn-info btn-sm">Form</button>
 	            </ul>
 	          </div>
-	          <Cart cartToCatalog={this.props.cart} cart={this.props.cart}/>
+	          <Cart />
 	        </nav>
 			   <div>
 					 {view}
