@@ -40,17 +40,21 @@ class Cart extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+
   }
   openModal() {
     this.setState({modalIsOpen: true});
+
   }
   afterOpenModal() {
     // references are now sync'd and can be accessed.
     this.subtitle.style.color = '#808080';
+
   }
   closeModal() {
     this.setState({modalIsOpen: false});
   }
+
   render() {
     // const state = this.props.getState();
     let items = this.props.cart.items.map((x,index)=><Item cartToCatalog={this.props.cart} key={index} data={x}/>)
@@ -68,7 +72,7 @@ class Cart extends React.Component {
           <h2 ref={subtitle => this.subtitle = subtitle} className="varuKorg">Varukorg</h2>
           {items}
           <div className="d-flex align-items-end flex-column totalsumma">
-            <h3>Totalsumma:  </h3>
+            <h3>Totalsumma: {this.props.cart.total}</h3>
             <button type="button" className="btn btn-success" onClick={this.closeModal}>Gå till kassan</button>
           </div>
         </Modal>
@@ -78,7 +82,8 @@ class Cart extends React.Component {
 }
 function mapStateToProps(state) {
 	return {
-		cart: state.cart
+		cart: state.cart,
+    catalog: state.catalog
 	}
 }
 export default connect(mapStateToProps)(Cart);

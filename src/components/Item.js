@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {actionDeleteItem,actionAddQuantity,actionHistory} from '../actions';
+import {actionDeleteItem,actionAddQuantity,actionMinusQuantity,actionHistory,actionTotal} from '../actions';
 import {connect} from 'react-redux';
 // import {cartReducer} from '../reducers';
 // import {Cart} from './Cart';
@@ -10,6 +10,7 @@ class Item extends Component{
     super(props);
     this.handleDelete = this.handleDelete.bind(this);
      this.handleAddCount = this.handleAddCount.bind(this);
+     this.handleMinusCount = this.handleMinusCount.bind(this);
   }
   handleDelete(){
     let action = actionDeleteItem(this.props.data);
@@ -19,6 +20,12 @@ class Item extends Component{
   }
   handleAddCount(){
     let action = actionAddQuantity(this.props.cartToCatalog.count);
+    debugger
+    this.props.dispatch(action);
+    // this.props.dispatch(actionTotal(this.props.cartToCatalog.total))
+  }
+  handleMinusCount(){
+    let action = actionMinusQuantity(this.props.cartToCatalog.count);
     this.props.dispatch(action);
   }
   render(){
@@ -28,11 +35,10 @@ class Item extends Component{
         <div><img style={{width:'35%',height:'65%'}} src={this.props.data.img} alt=''/></div>
         <div style={{marginRight:'11%'}} className="d-flex flex-column">
           <h6>Pris/st</h6>
-          <h6>{this.props.data.ordinaryPrice}</h6>
+          <h6>{this.props.data.price},-</h6>
         </div>
-
         <div className="d-flex align-items-end flex-column">
-         <i className="fa fa-minus" aria-hidden="true"></i>
+         <i onClick={this.handleMinusCount} className="fa fa-minus" aria-hidden="true"></i>
          <h6>Antal:{this.props.cartToCatalog.count} </h6>
           <i onClick={this.handleAddCount}  className="fa fa-plus" aria-hidden="true" ></i>
         </div>
@@ -42,13 +48,12 @@ class Item extends Component{
       </div>
     )
   }
-
 }
 
 function mapStateToProps(state) {
 	return {
     tab:state.tab,
-    products: state.products,
+    catalog: state.catalog,
     cart: state.cart,
     history: state.history
 	}

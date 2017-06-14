@@ -1,15 +1,18 @@
 import React,{Component} from 'react';
-import {actionAddProduct,actionChangeTab,actionHistory} from '../actions';
+import {actionAddItem,actionDeleteItem,actionHistory,actionChangeTab,actionAddQuantity,actionAddProduct,actionAddToCatalog} from '../actions';
+import {connect} from 'react-redux';
+import {store} from '../index';
+import Product from './Product';
 
 class Form extends Component{
   constructor(props){
     super(props);
     this.state = {
       affiliationInput:'',
-      nameInput:'',
-      priceInput:'',
+      name:'',
+      price:null,
       ordinaryPrice:'',
-      imgInput:''
+      img:''
     }
     this.handleAddProduct = this.handleAddProduct.bind(this);
     this.handleaffiliationInput =  this.handleaffiliationInput.bind(this);
@@ -22,35 +25,46 @@ class Form extends Component{
     this.setState({affiliationInput:e.target.value})
   }
   handlenameInput(e){
-    this.setState({nameInput:e.target.value})
+    this.setState({name:e.target.value})
   }
   handlepriceInput(e){
-    this.setState({priceInput:e.target.value})
+    this.setState({price:e.target.value})
   }
   handleordinaryPrice(e){
     this.setState({ordinaryPrice:e.target.value})
   }
   handleimgInput(e){
-   this.setState({imgInput:e.target.value})
+   this.setState({img:e.target.value})
   }
   handleAddProduct(){
-   	 let action = actionAddProduct(this.state);
+   	 let action = actionAddToCatalog(this.state);
    	 this.props.dispatch(action);
-   	 this.props.dispatch(actionHistory(action));
-     this.pros.push(this.state)
+     let homeAction = actionChangeTab(1);
+ 		  this.props.dispatch(homeAction);
   }
   render(){
     return(
-      <form className="form-inline my-2 my-lg-0">
+      <div className="form-inline my-2 my-lg-0">
         <input value={this.state.affiliationInput} onChange={this.handleaffiliationInput} className="form-control mr-sm-2" type="text" placeholder="affiliation" />
-        <input value={this.state.nameInput} onChange={this.handlenameInput} className="form-control mr-sm-2" type="text" placeholder="name" />
-        <input value={this.state.priceInput} onChange={this.handlepriceInput} className="form-control mr-sm-2" type="text" placeholder="price" />
-        <input value={this.state.ordinaryPrice} onChange={this.handleordinaryPrice} className="form-control mr-sm-2" type="text" placeholder="ordinaryPrice" />
-        <input value={this.state.imgInput} onChange={this.handleimgInput} lassName="form-control mr-sm-2" type="text" placeholder="img" />
-        <button onClick={this.handleAddProduct} className="btn btn-outline-success my-2 my-sm-0" type="submit">Lägg till</button>
-      </form>
+        <input value={this.state.name} onChange={this.handlenameInput} className="form-control mr-sm-2" type="text" placeholder="name" />
+        <input  value={this.state.price} onChange={this.handlepriceInput} className="form-control mr-sm-2" type="number" placeholder="price" />
+        <input value={this.state.ordinaryPrice} onChange={this.handleordinaryPrice} className="form-control mr-sm-2" type="number" placeholder="ordinaryPrice" />
+        <input value={this.state.img} onChange={this.handleimgInput} className="form-control mr-sm-2" type="text" placeholder="img" />
+        <p>Product to add:</p>
+        <Product data={this.state}/>
+        <button onClick={this.handleAddProduct} className="btn btn-outline-success my-2 my-sm-0">Lägg till</button>
+      </div>
+
+
     )
   }
 }
+function mapStateToProps(state) {
+	return {
+		catalog: state.catalog
 
-export default Form;
+	}
+}
+export default connect(mapStateToProps)(Form);
+
+//export default Form;

@@ -32,11 +32,11 @@ class App extends Component {
 	}
 	render() {
 		let view;
-		if(this.props.tab===3){
+		if(this.props.tab===1){
 	   console.log(this.props.tab);
-			view = <History history={this.props.history}/>
-		}else if(this.props.tab===1){
-			view=<Catalog  />;
+		 view=<Catalog  />;
+	 }else if(this.props.tab===3){
+			view = <History />
 		}
 		else if(this.props.tab===4){
 			view=<Form  pros={this.props.products}/>

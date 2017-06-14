@@ -2,9 +2,11 @@ const ADD_ITEM = 'ADD_ITEM';
 const DELETE_ITME = 'DELETE_ITME';
 const HISTORY = 'HISTORY';
 const CHANGE_TAB = 'CHANGE_TAB';
-const ADDQUANTITY = 'ADDQUANTITY';
+const ADD_QUANTITY = 'ADDQUANTITY';
 const ADD_PRODUCT = 'Add_PRODUCT';
-const ADDPRODUCTTOCATALOG = 'ADDPRODUCTTOCATALOG';
+const ADD_TO_CATALOG = 'ADD_TO_CATALOG';
+const MINUS_QUANTITY = 'MINUS_QUANTITY';
+const CACULATE_SUMMA = 'CACULATE_SUMMA';
 
 function actionChangeTab(selectedTab){
 	return {
@@ -24,6 +26,12 @@ function actionDeleteItem(p){
 		item: p
 	}
 }
+function actionTotal(summa){
+	return{
+		type: CACULATE_SUMMA,
+		summa
+	}
+}
 function actionHistory(action){
 	return{
 		type: HISTORY,
@@ -38,16 +46,22 @@ function actionAddProduct(product){
 }
 function actionAddQuantity(count){
 	return {
-		type: ADDQUANTITY,
-		count: count
+		type: ADD_QUANTITY,
+		count: count+1
 	}
 }
-function actionCatalog(product){
+function actionMinusQuantity(count){
+	return {
+		type: MINUS_QUANTITY,
+		count: count-1
+	}
+}
+function actionAddToCatalog(product){
 	return{
-		type: ADDPRODUCTTOCATALOG,
+		type: ADD_TO_CATALOG,
 		product:product
 	}
 }
 export{ADD_ITEM,actionAddItem,DELETE_ITME,actionDeleteItem,HISTORY,
-	actionHistory,CHANGE_TAB,actionChangeTab,ADDQUANTITY,ADD_PRODUCT,
-	actionAddProduct,actionAddQuantity,ADDPRODUCTTOCATALOG,actionCatalog};
+	actionHistory,CHANGE_TAB,actionChangeTab,ADD_QUANTITY,actionAddQuantity,ADD_PRODUCT,
+	actionAddProduct,ADD_TO_CATALOG,actionAddToCatalog,MINUS_QUANTITY,actionMinusQuantity,CACULATE_SUMMA,actionTotal};
