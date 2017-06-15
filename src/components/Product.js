@@ -9,10 +9,11 @@ class Product extends Component{
 		this.handleAddProductButton = this.handleAddProductButton.bind(this);
 	}
  handleAddProductButton(e){
-	 let action = actionAddItem(this.props.data);
-	 this.props.dispatch(action);
-	 this.props.dispatch(actionHistory(action));
 
+	 let payload = {count:1,item:this.props.data}
+	 let action = actionAddItem(payload);
+	 this.props.dispatch(action);
+	//  this.props.dispatch(actionHistory(action));
  }
 	render(){
 		return (

@@ -8,6 +8,7 @@ class Form extends Component{
   constructor(props){
     super(props);
     this.state = {
+      id: Math.floor(Date.now() / 1000),
       affiliationInput:'',
       name:'',
       price:null,
@@ -22,7 +23,7 @@ class Form extends Component{
     this.handleimgInput =  this.handleimgInput.bind(this);
   }
   handleaffiliationInput(e){
-    this.setState({affiliationInput:e.target.value})
+    this.setState({affiliation:e.target.value})
   }
   handlenameInput(e){
     this.setState({name:e.target.value})
@@ -37,6 +38,7 @@ class Form extends Component{
    this.setState({img:e.target.value})
   }
   handleAddProduct(){
+   debugger
    	 let action = actionAddToCatalog(this.state);
    	 this.props.dispatch(action);
      let homeAction = actionChangeTab(1);
@@ -45,7 +47,7 @@ class Form extends Component{
   render(){
     return(
       <div className="form-inline my-2 my-lg-0">
-        <input value={this.state.affiliationInput} onChange={this.handleaffiliationInput} className="form-control mr-sm-2" type="text" placeholder="affiliation" />
+        <input value={this.state.affiliation} onChange={this.handleaffiliationInput} className="form-control mr-sm-2" type="text" placeholder="affiliation" />
         <input value={this.state.name} onChange={this.handlenameInput} className="form-control mr-sm-2" type="text" placeholder="name" />
         <input  value={this.state.price} onChange={this.handlepriceInput} className="form-control mr-sm-2" type="number" placeholder="price" />
         <input value={this.state.ordinaryPrice} onChange={this.handleordinaryPrice} className="form-control mr-sm-2" type="number" placeholder="ordinaryPrice" />

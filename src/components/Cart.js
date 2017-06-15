@@ -44,8 +44,8 @@ class Cart extends React.Component {
   }
   openModal() {
     this.setState({modalIsOpen: true});
-    let action = actionTotal(this.props.count,this.props.catalog.price);
-    this.props.dispatch(action);
+    // let action = actionTotal(this.props.count,this.props.catalog.price);
+    // this.props.dispatch(action);
   }
   afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -54,17 +54,15 @@ class Cart extends React.Component {
   }
   closeModal() {
     this.setState({modalIsOpen: false});
-
   }
 
   render() {
     // const state = this.props.getState();
+
     let items = this.props.cart.map((x,index) => <Item count={x.count}
-       key={index} data={x.item}/>)
-       debugger
-     console.log('cart is',this.props.cart)
-     let total = this.props.cart;
-     debugger
+       key={x.item.id} data={x.item}/>)
+     let total = this.props.cart.reduce((sum,x)=>{return sum + x.count * x.item.price},0);
+
     return (
 
       <div>

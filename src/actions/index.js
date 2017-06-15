@@ -7,6 +7,7 @@ const ADD_PRODUCT = 'Add_PRODUCT';
 const ADD_TO_CATALOG = 'ADD_TO_CATALOG';
 const MINUS_QUANTITY = 'MINUS_QUANTITY';
 const CACULATE_SUMMA = 'CACULATE_SUMMA';
+const CHANGE_ITEM = 'CHANGE_ITEM';
 
 function actionChangeTab(selectedTab){
 	return {
@@ -65,6 +66,21 @@ function actionAddToCatalog(product){
 		product:product
 	}
 }
-export{ADD_ITEM,actionAddItem,DELETE_ITME,actionDeleteItem,HISTORY,
-	actionHistory,CHANGE_TAB,actionChangeTab,ADD_QUANTITY,actionAddQuantity,ADD_PRODUCT,
-	actionAddProduct,ADD_TO_CATALOG,actionAddToCatalog,MINUS_QUANTITY,actionMinusQuantity,CACULATE_SUMMA,actionTotal};
+function actionChangeItem(item){
+	return {
+		type: CHANGE_ITEM,
+		item:item
+	}
+}
+export {
+	ADD_ITEM,actionAddItem,
+	DELETE_ITME,actionDeleteItem,
+	HISTORY,actionHistory,
+	CHANGE_TAB,actionChangeTab,
+	ADD_QUANTITY,actionAddQuantity,
+	ADD_PRODUCT,actionAddProduct,
+	ADD_TO_CATALOG,actionAddToCatalog,
+	MINUS_QUANTITY,actionMinusQuantity,
+	CACULATE_SUMMA,actionTotal,
+	CHANGE_ITEM,actionChangeItem
+};
