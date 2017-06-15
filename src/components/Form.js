@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {actionAddItem,actionDeleteItem,actionHistory,actionChangeTab,actionAddQuantity,actionAddProduct,actionAddToCatalog} from '../actions';
 import {connect} from 'react-redux';
-import {store} from '../index';
+// import {store} from '../index';
 import Product from './Product';
 
 class Form extends Component{

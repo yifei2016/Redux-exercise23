@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 // import ReactDOM from 'react-dom';
 import Item from './Item';
 import {connect} from 'react-redux';
-
+import {actionTotal} from '../actions';
 
 // let initialState = {
 // 	products: []
@@ -44,7 +44,8 @@ class Cart extends React.Component {
   }
   openModal() {
     this.setState({modalIsOpen: true});
-
+    let action = actionTotal(this.props.count,this.props.catalog.price);
+    this.props.dispatch(action);
   }
   afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -53,13 +54,19 @@ class Cart extends React.Component {
   }
   closeModal() {
     this.setState({modalIsOpen: false});
+
   }
 
   render() {
     // const state = this.props.getState();
-    let items = this.props.cart.items.map((x,index)=><Item cartToCatalog={this.props.cart} key={index} data={x}/>)
+    let items = this.props.cart.map((x,index) => <Item count={x.count}
+       key={index} data={x.item}/>)
+       debugger
      console.log('cart is',this.props.cart)
+     let total = this.props.cart;
+     debugger
     return (
+
       <div>
         <button className="fa fa-shopping-basket fa-2x basket"  onClick={this.openModal}></button>
         <Modal
@@ -72,7 +79,7 @@ class Cart extends React.Component {
           <h2 ref={subtitle => this.subtitle = subtitle} className="varuKorg">Varukorg</h2>
           {items}
           <div className="d-flex align-items-end flex-column totalsumma">
-            <h3>Totalsumma: {this.props.cart.total}</h3>
+            <h3>Totalsumma: {total}</h3>
             <button type="button" className="btn btn-success" onClick={this.closeModal}>Gå till kassan</button>
           </div>
         </Modal>
@@ -81,6 +88,7 @@ class Cart extends React.Component {
   }
 }
 function mapStateToProps(state) {
+  console.log('statecart',state.cart)
 	return {
 		cart: state.cart,
     catalog: state.catalog

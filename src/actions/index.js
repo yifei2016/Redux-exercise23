@@ -26,10 +26,11 @@ function actionDeleteItem(p){
 		item: p
 	}
 }
-function actionTotal(summa){
+function actionTotal(count,item){
 	return{
 		type: CACULATE_SUMMA,
-		summa
+		count:count,
+		item:item,
 	}
 }
 function actionHistory(action){
@@ -44,16 +45,18 @@ function actionAddProduct(product){
 		product: product
 	}
 }
-function actionAddQuantity(count){
+function actionAddQuantity(count,item){
 	return {
 		type: ADD_QUANTITY,
-		count: count+1
+		count: count,
+		item:item
 	}
 }
-function actionMinusQuantity(count){
+function actionMinusQuantity(count,item){
 	return {
 		type: MINUS_QUANTITY,
-		count: count-1
+		count: count,
+		item:item
 	}
 }
 function actionAddToCatalog(product){

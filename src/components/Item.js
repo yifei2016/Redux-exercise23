@@ -19,17 +19,18 @@ class Item extends Component{
 
   }
   handleAddCount(){
-    let action = actionAddQuantity(this.props.cartToCatalog.count);
-    debugger
+    let action = actionAddQuantity(this.props.count,this.props.data);
+    
     this.props.dispatch(action);
     // this.props.dispatch(actionTotal(this.props.cartToCatalog.total))
   }
   handleMinusCount(){
-    let action = actionMinusQuantity(this.props.cartToCatalog.count);
+    let action = actionMinusQuantity(this.props.count,this.props.data);
     this.props.dispatch(action);
   }
   render(){
     return (
+
       <div className="d-flex justify-content-between">
         <div> <h5>{this.props.data.affiliation}</h5><p>{this.props.data.name}</p></div>
         <div><img style={{width:'35%',height:'65%'}} src={this.props.data.img} alt=''/></div>
@@ -39,7 +40,7 @@ class Item extends Component{
         </div>
         <div className="d-flex align-items-end flex-column">
          <i onClick={this.handleMinusCount} className="fa fa-minus" aria-hidden="true"></i>
-         <h6>Antal:{this.props.cartToCatalog.count} </h6>
+         <h6>Antal:{this.props.count} </h6>
           <i onClick={this.handleAddCount}  className="fa fa-plus" aria-hidden="true" ></i>
         </div>
         <div>

@@ -41,29 +41,67 @@ function catalogReducer(state={},action){
     return state;
   }
 }
-function cartReducer(state={},action){
-	if(state.items===undefined){
-		state.items=[];
-	}
+function cartReducer(state=[],action){
 	switch(action.type){
 		case ADD_ITEM:
-		  return {...state, items: [...state.items, action.item]};
+    //let lista = state.cart.slice();
+    //lista.push({item: action.item, count: 1});
+		  return [
+        ...state,
+        {
+          item: action.item,
+          count: 1
+        }
+      ];
 			// state.items.push(action.item);
 			// return state;
 		case DELETE_ITME:
 			function compareProducts(p1,p2){
 				return (p1.name === p2.name && p1.affiliation === p2.affiliation && p1.price === p2.price && p1.ordinaryPrice ===p2.ordinaryPrice && p1.img===p2.img)
 			}
-			return {...state, items: state.items.filter(x=> !compareProducts(x, action.item))}
+      let newlista = state.filter(x => !compareProducts(x.item, action.item))
+			return [...state, newlista ]
 			// state = state.items.slice(itemIndex,1);
 			// return state;
-      case ADD_QUANTITY:
-      debugger
-        return {...state,count: action.count}
+    case ADD_QUANTITY:
+      function compareProducts(p1,p2){
+				return (p1.item === p2.item && p1.count === p2.count )
+			}
+      let obj = state.find( x => compareProducts(x.item, action.item) )
+
+      let newItemList;// = [];
+      newItemList = state.filter(x => !compareProducts(x.item,action.item));
+
+      newItemList.push({item: obj.item, count: obj.count+1})
+      return newItemList;  // TODO
+      // let newObject = {state.items.count: action.item.count,state.items.item: action.item.item}
+
+ // create new items list
+        // user filter to remove old item
+        // add new item and new count as an object
+
+        // return {...state,items: newObject} // does action contain both count and item?
        case MINUS_QUANTITY:
-          return {...state,count: action.count}
+          function compareProducts(p1,p2){
+    				return (p1.item === p2.item && p1.count === p2.count )
+    			}
+          let findobj = state.find( x => compareProducts(x.item, action.item) )
+          let itemList;// = [];
+          itemList = state.filter(x => !compareProducts(x.item,action.item));
+          itemList.push({item: findobj.item, count: findobj.count-1})
+          return itemList;
        case CACULATE_SUMMA:
-        return {...state, total:action.summa}
+
+           function compareProducts(p1,p2){
+             return (p1.item === p2.item && p1.count === p2.count )
+           }
+           let findobject = state.find( x => compareProducts(x.item, action.item) )
+           let itemLi;// = [];
+           itemLi = state.filter(x => !compareProducts(x.item,action.item));
+           itemLi.push({item: {...findobject.item, sum:findobject.item.price*findobject.count },
+              count: findobject.count});
+
+           return itemLi;
 			 default:
 			  return state;
 		}

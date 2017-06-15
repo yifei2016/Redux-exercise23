@@ -10,11 +10,8 @@ import {tabReducer,cartReducer,historyReducer,productReducer,catalogReducer} fro
 
 let initialState = {
 	tab:1,
-	cart: {
-		items:[],
-		total:0,
-		count:0
-	},
+	cart: [],// item{}, count
+
 	history:[{type:''}],
 	catalog:{
 		products: [
