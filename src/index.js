@@ -6,8 +6,11 @@ import './index.css';
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import {tabReducer,cartReducer,historyReducer,productReducer,catalogReducer} from './reducers';
+//Redux is a terribly simple library for state management, 
+//and has made working with React more manageable for everyone.
 
-
+//redux and React are actually two separate 
+//libraries which can and have been used completely independent of each other
 let initialState = {
 	tab:1,
 	cart: [],// item{}, count
@@ -85,11 +88,15 @@ let rootReducer = combineReducers({
 	history:historyReducer,
 	catalog:catalogReducer
 });
-
+//combineReducers to create a single root reducer out of many.
 const store = createStore(rootReducer, initialState);
 //Creates a Redux store that holds the complete state tree of your app.
 //There should only be a single store in your app.
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+////only components within the Provider can be connected 
+////Provider is given the store as a prop
+////Provider is a React component given to us by the “react-redux” library. 
+//It serves just one purpose : to “provide” the store to its child components.
 registerServiceWorker();
 export {store};

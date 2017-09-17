@@ -44,6 +44,10 @@ class Form extends Component{
      let homeAction = actionChangeTab(1);
  		  this.props.dispatch(homeAction);
   }
+  //To change data, we need to dispatch an action,
+  //We can either retrieve data by obtaining its current state, 
+  //or change its state by dispatching an action
+
   render(){
     return(
       <div className="form-inline my-2 my-lg-0">
@@ -68,5 +72,9 @@ function mapStateToProps(state) {
 	}
 }
 export default connect(mapStateToProps)(Form);
+//connect to map the stores state and dispatch to the props of a component.
 
+//mapStateToProps and mapDispatchToProps are both pure functions that are provided
+//the stores “state” and “dispatch” respectively. Furthermore, both functions have to return an object, 
+//whose keys will then be passed on as the props of the component they are connected to.
 //export default Form;
