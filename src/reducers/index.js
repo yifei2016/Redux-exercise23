@@ -1,4 +1,5 @@
-import {ADD_ITEM,DELETE_ITME,HISTORY,CHANGE_TAB,ADD_QUANTITY,MINUS_QUANTITY,ADD_PRODUCT,ADD_TO_CATALOG,CACULATE_SUMMA,CHANGE_ITEM} from '../actions'
+import {ADD_ITEM,DELETE_ITME,HISTORY,CHANGE_TAB,ADD_QUANTITY,
+  MINUS_QUANTITY,ADD_PRODUCT,ADD_TO_CATALOG,CACULATE_SUMMA,CHANGE_ITEM} from '../actions'
 // function productReducer(state=[],action){
 //   return state;
 // }
@@ -111,7 +112,8 @@ function cartReducer(state=[],action){
       let newItemList;// = [];
       newItemList = state.filter(x => !compareProducts(x.item,action.item));
 
-      newItemList.push({item: obj.item, count: obj.count+1})
+      newItemList.push({item: obj.item, counregisterServiceWorker();
+export {store};t: obj.count+1})
       return newItemList;  // TODO
       // let newObject = {state.items.count: action.item.count,state.items.item: action.item.item}
 
