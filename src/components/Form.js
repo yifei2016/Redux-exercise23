@@ -43,6 +43,9 @@ class Form extends Component{
    	 this.props.dispatch(action);
      let homeAction = actionChangeTab(1);
  		  this.props.dispatch(homeAction);
+      //or store.dispatch()
+      //As for why connect() from React Redux passes dispatch as a prop 
+      //instead of store itself—it's because you don't really need store itself in the connected components
   }
   //To change data, we need to dispatch an action,
   //We can either retrieve data by obtaining its current state, 

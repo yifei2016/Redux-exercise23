@@ -22,7 +22,7 @@ function productReducer(state=[],action){
 //     ]
 //   }
 // }
-
+//Given the same arguments, it should calculate the next state and return it. 
 function tabReducer(state=1,action){
 
 	switch(action.type){
@@ -43,6 +43,11 @@ function catalogReducer(state={},action){
     return state;
   }
 }
+//We return the previous state in the default case. 
+//It's important to return the previous state for any unknown action.
+//You must supply an empty object as the first parameter. 
+//You can also enable the object spread operator proposal to write { ...state, ...newState } instead.
+//When you want to split your data handling logic, you'll use reducer composition instead of many stores.
 function cartReducer(state=[],action){
 	switch(action.type){
     case CHANGE_ITEM:
@@ -64,7 +69,7 @@ function cartReducer(state=[],action){
       //lista.push({item: action.item, count: 1});
       //  let news = state.push(action.item)
 
-      let newsta = state.slice();
+      let newsta = state.slice();//make a copy of state
 
      let index = newsta.findIndex(o => {
         return o.item.id === action.item.item.id;
@@ -111,12 +116,11 @@ function cartReducer(state=[],action){
 
       let newItemList;// = [];
       newItemList = state.filter(x => !compareProducts(x.item,action.item));
-
-      newItemList.push({item: obj.item, counregisterServiceWorker();
-export {store};t: obj.count+1})
+      newItemList.push({item: obj.item, t: obj.count+1})
       return newItemList;  // TODO
-      // let newObject = {state.items.count: action.item.count,state.items.item: action.item.item}
 
+      // let newObject = {state.items.count: action.item.count,state.items.item: action.item.item}
+ //counregisterServiceWorker(); export {store};
  // create new items list
         // user filter to remove old item
         // add new item and new count as an object
